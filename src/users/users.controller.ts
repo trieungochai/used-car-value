@@ -13,10 +13,10 @@ export class UsersController {
   }
 
   @Get('/:id')
-  findUser(@Param('id') id: string) {
-    const user = await this.usersService.findOne(parseInt(id))
-    if(!user) {
-      throw new NotFoundException('User Not Found')
+  async findUser(@Param('id') id: string) {
+    const user = await this.usersService.findOne(parseInt(id));
+    if (!user) {
+      throw new NotFoundException('User Not Found');
     }
 
     return user;
@@ -24,16 +24,16 @@ export class UsersController {
 
   @Get()
   findUsers(@Query('email') email: string) {
-    return this.usersService.find(email)
+    return this.usersService.find(email);
   }
 
   @Delete('/:id')
   removeUser(@Param('id') id: string) {
-    return this.usersService.remove(parseInt(id))
+    return this.usersService.remove(parseInt(id));
   }
 
   @Patch('/:id')
   updateUser(@Param('id') id: string, @Body() body: UpdateUserDto) {
-    return this.usersService.update(parseInt(id), body)
+    return this.usersService.update(parseInt(id), body);
   }
 }
